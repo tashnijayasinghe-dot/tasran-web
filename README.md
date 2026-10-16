@@ -40,7 +40,7 @@ The API must authenticate and authorize the order on the server, generate the Pa
 Enable CORS for the website origin on this endpoint. Never expose the merchant secret or accept a client-generated hash. PayHere server notifications must be handled at:
 
 ```text
-https://api-gateway.tasran.com/payhere/notify
+https://api-gateway.tasran.com/payhere/notify/tutormate
 ```
 
 The notification endpoint is the source of truth for payment confirmation. Verify PayHere's notification signature and the amount/order ID on the server before marking an order paid. Do not open `https://www.payhere.lk/pay/checkout` directly; it requires a payment POST flow and is not a browser checkout page.
@@ -63,7 +63,7 @@ Your page should request payment data from:
 https://api-gateway.tasran.com/payhere/payment?order_id=ORD-1001
 
 Configure PayHere server notifications/webhooks as:
-https://api-gateway.tasran.com/payhere/notify
+https://api-gateway.tasran.com/payhere/notify/tutormate
 
 Do not configure or open this as the checkout page:
 
