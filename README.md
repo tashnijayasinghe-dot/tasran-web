@@ -11,7 +11,7 @@ https://www.tasran.com/payhere.html?order_id=ORDER_ID
 The page loads PayHere's JavaScript SDK and requests the payment object from:
 
 ```text
-GET https://api.tasran.com/payhere/payment?order_id=ORDER_ID
+GET https://api-gateway.tasran.com/payhere/payment?order_id=ORDER_ID
 ```
 
 The API must authenticate and authorize the order on the server, generate the PayHere hash with the merchant secret, and return either the payment object directly or under a `payment` property. The object must include `order_id`, `merchant_id`, `amount`, `currency`, and `hash`, plus the normal PayHere fields such as customer name, email, phone, address, city, country, and items. A typical response is:
@@ -40,7 +40,7 @@ The API must authenticate and authorize the order on the server, generate the Pa
 Enable CORS for the website origin on this endpoint. Never expose the merchant secret or accept a client-generated hash. PayHere server notifications must be handled at:
 
 ```text
-https://api.tasran.com/payhere/notify
+https://api-gateway.tasran.com/payhere/notify
 ```
 
 The notification endpoint is the source of truth for payment confirmation. Verify PayHere's notification signature and the amount/order ID on the server before marking an order paid. Do not open `https://www.payhere.lk/pay/checkout` directly; it requires a payment POST flow and is not a browser checkout page.
@@ -60,10 +60,10 @@ https://www.tasran.com/payhere.html?order_id=ORD-1001
 
 
 Your page should request payment data from:
-https://api.tasran.com/payhere/payment?order_id=ORD-1001
+https://api-gateway.tasran.com/payhere/payment?order_id=ORD-1001
 
 Configure PayHere server notifications/webhooks as:
-https://api.tasran.com/payhere/notify
+https://api-gateway.tasran.com/payhere/notify
 
 Do not configure or open this as the checkout page:
 

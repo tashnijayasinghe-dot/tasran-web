@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="tasran.png">
     <meta name="theme-color" content="#0A0E1A">
     <meta name="referrer" content="strict-origin-when-cross-origin">
     <title>Secure payment | TutorMate</title>
@@ -92,8 +93,8 @@
         (function () {
             'use strict';
 
-            var API_URL = 'https://api.tasran.com/payhere/payment';
-            var NOTIFY_URL = 'https://api.tasran.com/payhere/notify';
+            var API_URL = 'https://api-gateway.tasran.com/payhere/payment';
+            var NOTIFY_URL = 'https://api-gateway.tasran.com/payhere/notify';
             var params = new URLSearchParams(window.location.search);
             var orderId = params.get('order_id');
             var status = document.getElementById('status');
