@@ -129,7 +129,12 @@ small{display:block;color:var(--mut);font-size:.88rem;margin-top:10px;max-width:
 .ph div:nth-child(2){border-top-color:var(--pink)}.ph div:nth-child(3){border-top-color:var(--orange)}.ph div:nth-child(4){border-top-color:var(--green)}
 .ph h3{margin:0 0 4px;font-size:1.05rem}.ph ol{margin:0}.ph ol li{margin:6px 0;padding-left:0;font-size:.96rem}.ph ol li:before{display:none}
 .ph ol{list-style:decimal;padding-left:1.2rem}
-.sync-demo{max-width:760px;display:flex;align-items:center;justify-content:center;gap:clamp(14px,4vw,36px);padding:22px;margin:20px 0;background:linear-gradient(135deg,#e6f8fc,#f5f4ff);border:1px solid var(--line);border-radius:18px}
+.sync-demo{max-width:760px;display:grid;justify-items:center;gap:14px;padding:22px;margin:20px 0;background:linear-gradient(135deg,#e6f8fc,#f5f4ff);border:1px solid var(--line);border-radius:18px}
+.sync-demo .sync-device{width:min(290px,100%)}
+.sync-clients{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;width:100%;max-width:610px}
+.sync-client{display:grid;justify-items:center;gap:8px;min-width:0}
+.sync-link{color:var(--indigo);font-size:1.6rem;font-weight:800;line-height:1}
+.sync-client .sync-device{width:100%}
 .sync-device{width:min(260px,42%);padding:16px;background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:0 12px 28px #231a5c18}
 .sync-device small{margin:0 0 8px;font-size:.75rem;text-transform:uppercase;letter-spacing:.08em}
 .sync-head{display:flex;align-items:center;gap:9px;font-weight:600;line-height:1.25}
@@ -138,8 +143,8 @@ small{display:block;color:var(--mut);font-size:.88rem;margin-top:10px;max-width:
 .sync-toggle:after{content:"";display:block;width:16px;height:16px;margin-left:16px;border-radius:50%;background:#fff}
 .sync-state{display:flex;align-items:center;gap:8px;margin-top:14px;padding:10px;border-radius:10px;background:#e9f8f0;color:#16734b;font-size:.86rem;font-weight:600;line-height:1.35}
 .sync-state i{font-style:normal;font-size:1.1rem}
-.sync-link{color:var(--indigo);font-size:2rem;font-weight:800}
-@media(max-width:520px){.sync-demo{padding:14px;gap:10px}.sync-device{width:44%;padding:12px}.sync-head{font-size:.86rem}.sync-state{font-size:.76rem;padding:8px}.sync-link{font-size:1.4rem}}
+.sync-link{color:var(--indigo);font-size:1.6rem;font-weight:800;line-height:1}
+@media(max-width:520px){.sync-demo{padding:14px;gap:10px}.sync-clients{gap:8px}.sync-device{padding:12px}.sync-head{font-size:.86rem}.sync-state{font-size:.76rem;padding:8px}.sync-link{font-size:1.25rem}}
 details{max-width:70ch;background:var(--card);border:1px solid var(--line);border-radius:12px;margin:10px 0;padding:0 18px;transition:box-shadow .25s}
 details[open]{box-shadow:0 10px 26px #3b2f9e1a;border-color:var(--c)}
 summary{cursor:pointer;padding:14px 0;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:12px}
@@ -388,15 +393,20 @@ aside.open{transform:none}
 <p>Student, attendance, and financial information is important and should be handled carefully. Users are recommended to:</p>
 <ul><li>Keep regular backups.<li>Protect their device with a secure screen lock.<li>Avoid sharing backup files with unauthorized persons.<li>Verify imported student information.<li>Keep contact information up to date.<li>Perform a manual backup before changing or replacing devices.</ul>
 <h3>15.1 Multiple-Device Connectivity</h3>
-<p>Multiple Devices synchronizes TutorMate records between devices on the same local Wi-Fi network. Use this when you want two or more TutorMate installations—for example, a teacher's phone and a second staff device—to share supported student, class, fee, payment, and attendance changes.</p>
-<ol><li>Connect every device to the <strong>same Wi-Fi network</strong>. Guest Wi-Fi networks, mobile data, VPNs, or router settings that isolate devices may prevent local discovery.</li><li>On each device, open <strong>Settings</strong> and turn on <strong>Multiple Devices</strong>.</li><li>Keep TutorMate open briefly while it searches the local network. The status below the switch shows a searching indicator, the number of connected TutorMate devices, or a no-devices message.</li><li>Confirm that the other device appears in the connected-device count. Changes synchronize automatically while the devices are reachable on the same network.</li></ol>
-<div class="sync-demo" role="img" aria-label="Illustration of two TutorMate devices on the same Wi-Fi network, with Multiple Devices enabled and one connected device shown">
- <div class="sync-device"><small>Settings · Device 1</small><div class="sync-head"><span class="sync-icon">▣</span><span>Multiple Devices</span><span class="sync-toggle" aria-hidden="true"></span></div><div class="sync-state"><i>⌁</i><span>Connected devices: 1</span></div></div>
- <span class="sync-link" aria-hidden="true">↔</span>
- <div class="sync-device"><small>TutorMate · Device 2</small><div class="sync-head"><span class="sync-icon">▣</span><span>Same Wi-Fi network</span></div><div class="sync-state"><i>⌁</i><span>Multiple Devices enabled</span></div></div>
+<p><strong>Multiple Devices</strong> uses a local-network hub: one Android device acts as the hub, and other Android or Web installations connect to it as clients. Supported student, class, enrollment, fee-period, payment, and attendance records synchronize over the same Wi-Fi network. No internet connection, cloud relay, or cloud database is required for this LAN method.</p>
+<div class="sync-demo">
+ <div class="sync-device"><small>Android · LAN hub</small><div class="sync-head"><span class="sync-icon">▣</span><span>Pair Android or web clients</span><span class="sync-toggle" aria-hidden="true"></span></div><div class="sync-state"><i>⌁</i><span>Keep TutorMate open on the same Wi-Fi</span></div></div>
+ <div class="sync-clients">
+  <div class="sync-client"><span class="sync-link" aria-hidden="true">↓</span><div class="sync-device"><small>Android client</small><div class="sync-head"><span class="sync-icon">▣</span><span>Connect to hub</span></div><div class="sync-state"><i>⌁</i><span>Paired on local Wi-Fi</span></div></div></div>
+  <div class="sync-client"><span class="sync-link" aria-hidden="true">↓</span><div class="sync-device"><small>Web client</small><div class="sync-head"><span class="sync-icon">▤</span><span>Pair Android hub</span></div><div class="sync-state"><i>⌁</i><span>Paired on local Wi-Fi</span></div></div></div>
+ </div>
 </div>
-<small>Illustration: each TutorMate device must be connected to the same Wi-Fi network and have Multiple Devices turned on. The count shows other TutorMate devices currently detected by this device.</small>
-<div class="note i"><strong>If no devices are found:</strong> Check that both devices have Multiple Devices turned on, are connected to the same non-guest Wi-Fi network, and that the router allows devices to communicate with each other. Keep TutorMate open and allow a short time for discovery. This feature is not available on the web version. Use a manual backup before device migration; LAN sync is not a replacement for backups.</div>
+<small>Conceptual illustration—not an app screenshot. The Android hub shares its private LAN address through a pairing QR; Android and Web clients connect to that hub.</small>
+<h3>15.2 Set Up the Hub and Connect Devices</h3>
+<ol><li>Connect the Android hub and all clients to the <strong>same trusted Wi-Fi network</strong>. Guest networks, VPNs, mobile data, or router/client isolation can block device-to-device connections.</li><li>On the Android device that will be the hub, open <strong>Settings</strong>, turn on <strong>Multiple Devices</strong>, then select <strong>Use this Android as hub</strong> in <strong>Set up local network sync</strong>.</li><li>On the hub, choose <strong>Pair Android or web clients → Show QR</strong>. Keep this device and TutorMate open; the QR displays the hub’s private network address.</li><li>On another Android device, open <strong>Settings → Multiple Devices</strong>, select <strong>Connect to hub</strong>, then scan the hub QR or enter its private IPv4 address (for example, <strong>192.168.1.25</strong>).</li><li>On a Web client, open <strong>Settings → Multiple Devices</strong>, select <strong>Continue to pair hub</strong>, then scan the QR or enter the <strong>Android hub private IPv4 address</strong> and select <strong>Save</strong>. If camera scanning is unavailable, enter the address manually.</li><li>Make sure every device has the same academy name in its profile. Select <strong>Check connected devices</strong> to refresh and confirm the LAN connection. The hub supplies its current supported records to a newly connected client; supported changes then synchronize periodically while devices are reachable.</li></ol>
+<div class="note i"><strong>Web browser note:</strong> The browser may request camera permission to scan a QR code. Browser local-network permissions and HTTPS mixed-content rules may affect access; manual private IPv4 entry is available as an alternative.</div>
+<div class="note i"><strong>If a client cannot connect:</strong> Confirm the hub app is open, the entered address is current, both devices are on the same non-isolated Wi-Fi, and their academy names match. Check VPN, guest-network, router-isolation, and browser local-network settings. On Android, confirm that the device is configured as the hub.</div>
+<div class="note"><strong>Data and security:</strong> LAN sync communicates directly over the local network and should not be treated as encrypted traffic. Use a trusted private Wi-Fi network. Keep regular manual backups—synchronization is not a backup.</div>
 </section>
 
 <section class="sec" id="workflow"><h2><b>16</b>Recommended User Workflow</h2>
